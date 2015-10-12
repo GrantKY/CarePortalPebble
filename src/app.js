@@ -67,17 +67,23 @@ var insulin_name ="Insulin";
       fractional_part = 0;
   }
 
-  function GetIncrement(name, integerpart_set)
+  function GetIncrement(name, integerpart_set, longClick)
   {
       if(name == carbs_name)
         {
-          return 1.0;
+          if(longClick)
+            return 10;
+          else
+            return 1.0;
         }
       else if(name == insulin_name)
         {
           if(!integerpart_set)
             {
-              return 1;
+              if(longClick)
+                return 10;
+              else
+               return 1.0;
             }
             else
             {
@@ -88,9 +94,9 @@ var insulin_name ="Insulin";
       return 1;
   }
    
-  function UpdateValues(name, integerpart_set, sign)
+  function UpdateValues(name, integerpart_set,longClick, sign)
   {
-      var increment = GetIncrement(name,integerpart_set) * sign;
+      var increment = GetIncrement(name,integerpart_set, longClick) * sign;
   
       if(!integerpart_set)
       {
@@ -210,16 +216,37 @@ function CommitMessage(main,contents, name)
     contents.on('click', 'up', function(e)
     {
       console.log("currentvalue of integerpart_set: " + integerpart_set);
-      UpdateValues(name, integerpart_set, 1);
+      UpdateValues(name, integerpart_set, false, 1);
       console.log("integer_part: " + integer_part + " fractional_part:" + fractional_part);
       
       contents.title(GetTitle(name, integer_part, fractional_part));
     });
     
+    
+    contents.on('longClick', 'up', function(e)
+    {
+      console.log("currentvalue of integerpart_set: " + integerpart_set);
+      UpdateValues(name, integerpart_set, true, 1);
+      console.log("integer_part: " + integer_part + " fractional_part:" + fractional_part);
+      
+      contents.title(GetTitle(name, integer_part, fractional_part));
+    });
+    
+    contents.on('longClick', 'down', function(e)
+    {
+      
+      console.log("currentvalue of integerpart_set: " + integerpart_set);
+      UpdateValues(name, integerpart_set,true,  -1);
+      console.log("integer_part: " + integer_part + " fractional_part:" + fractional_part);
+      
+      contents.title(GetTitle(name, integer_part, fractional_part));
+    });
+    
+    
     contents.on('click', 'down', function(e)
     {
       console.log("currentvalue of integerpart_set: " + integerpart_set);
-      UpdateValues(name,integerpart_set, -1);
+      UpdateValues(name,integerpart_set, false, -1);
       console.log("integer_part: " + integer_part + " fractional_part:" + fractional_part);
  
       contents.title(GetTitle(name, integer_part, fractional_part));

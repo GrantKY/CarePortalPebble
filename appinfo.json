@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "T1 Tool",
-    "longName": "Nightscout Careportal V0.3",
+    "longName": "Nightscout Careportal",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -32,10 +32,10 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "CarePortalv0.3",
+    "shortName": "CarePortal",
     "uuid": "6777ea16-90d4-4c41-8eb6-850476577e52",
     "versionCode": 1,
-    "versionLabel": "3.0",
+    "versionLabel": "5.0",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false
